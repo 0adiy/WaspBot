@@ -28,11 +28,12 @@ export default async function messageCreateHandler(message) {
   const msgIn = message.guild
     ? chalk.black.bgGreen(message.guild?.nameAcronym)
     : chalk.black.bgWhite("Dm");
-  console.log(
-    `🗨️ ${chalk.bgRed(message.author.username)} in ${msgIn} has ${chalk.gray(
-      message.content
-    )}`
-  );
+  if (!message.author.bot)
+    console.log(
+      `🗨️ ${chalk.bgRed(message.author.username)} in ${msgIn} has ${chalk.gray(
+        message.content
+      )}`
+    );
 
   // for later use
   const [client, guild, channel] = [

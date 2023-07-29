@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Client } from "discord.js";
+import { ChatInputCommandInteraction, Client, Events } from "discord.js";
 
 const SuperUsers = [
   process.env["SU_Bisskut"],
@@ -8,33 +8,38 @@ const SuperUsers = [
 ];
 
 export default {
-  name: "interactionCreate",
+  name: Events.InteractionCreate,
   /**
    *
    * @param {ChatInputCommandInteraction} interaction
    * @param {Client} client
    */
   async execute(interaction, client) {
-    //checking if Chat Input command or not
-    if (!interaction.isChatInputCommand()) return;
-    console.log("🕹️  Chat Input");
+    if (interaction.isChatInputCommand()) {
+      console.log("🕹️ Chat Input");
 
-    // TODO: have a condtion if(command.dm && interaction.channel instanceof Discord.DMChannel) then return, also need to add dm property for each command
-    const command =
-      client.publicCommands.get(interaction.commandName) ||
-      client.devCommands.get(interaction.commandName);
-    if (!command)
-      return interaction.reply({
-        content: "This is outdated",
-        ephemeral: true,
-      });
+      // TODO: have a condtion if(command.dm && interaction.channel instanceof Discord.DMChannel) then return, also need to add dm property for each command
+      const command =
+        client.publicCommands.get(interaction.commandName) ||
+        client.devCommands.get(interaction.commandName);
+      if (!command)
+        return interaction.reply({
+          content: "This is outdated",
+          ephemeral: true,
+        });
 
-    if (command.devloper && !SuperUsers.includes(interaction.user.id))
-      return interaction.reply({
-        content: "This is for devs 🤓",
-        ephemeral: true,
-      });
+      if (command.devloper && !SuperUsers.includes(interaction.user.id))
+        return interaction.reply({
+          content: "This is for devs 🤓",
+          ephemeral: true,
+        });
 
-    command.execute(interaction, client);
+      command.execute(interaction, client);
+    } else if (interaction.isButton()) {
+      console.log("🔘 Button");
+    } else if (interaction.isStringSelectMenu()) {
+      console.log("🔘 String Select Menu");
+    }
+    console.log("Test");
   },
 };
