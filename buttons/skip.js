@@ -4,7 +4,6 @@ export default {
   name: "skip",
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
-
     if (!queue) return;
     try {
       await interaction.reply("Skipping...");
@@ -14,8 +13,7 @@ export default {
       });
       await interaction.deleteReply();
     } catch (e) {
-      console.log(e);
-      return await interaction.reply(`${e}`);
+      return await interaction.editReply(`${e}`);
     }
   },
 };
