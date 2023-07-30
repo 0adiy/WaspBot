@@ -8,6 +8,9 @@ async function loadFiles(dirName) {
     `${process.cwd().replace(/\\/g, "/")}/${dirName}/**/*.js`
   );
   // Files.forEach((file) => delete require.cache[require.resolve(file)]);
+
+  // FIXME: ESM Cache busting not possible so this is a workaround
+  Files.forEach((file) => `${file}?d=${Date.now()}`);
   return Files;
 }
 

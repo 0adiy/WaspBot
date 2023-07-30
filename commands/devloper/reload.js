@@ -10,6 +10,7 @@ import {
   loadPublicCommands,
   loadDevCommands,
 } from "../../handlers/slashCommandHandler.js";
+import loadButtons from "../../handlers/buttonHandler.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -21,6 +22,9 @@ export default {
     )
     .addSubcommand((option) =>
       option.setName("commands").setDescription("Reload commands")
+    )
+    .addSubcommand((option) =>
+      option.setName("buttons").setDescription("Reload buttons")
     ),
   /**
    *
@@ -42,6 +46,12 @@ export default {
         {
           loadPublicCommands(client);
           interaction.reply({ content: "Reloaded Commands", ephemeral: true });
+        }
+        break;
+      case "buttons":
+        {
+          loadButtons(client);
+          interaction.reply({ content: "Reloaded Buttons", ephemeral: true });
         }
         break;
     }

@@ -37,9 +37,13 @@ export default {
       command.execute(interaction, client);
     } else if (interaction.isButton()) {
       console.log("🔘 Button");
+
+      const btnFunc = client.buttons.get(interaction.customId);
+      if (!btnFunc) return;
+
+      btnFunc(interaction, client);
     } else if (interaction.isStringSelectMenu()) {
       console.log("🔘 String Select Menu");
     }
-    console.log("Test");
   },
 };

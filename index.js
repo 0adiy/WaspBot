@@ -39,6 +39,7 @@ const TOKEN = process.env["TOKEN"];
 client.events = new Collection();
 client.publicCommands = new Collection();
 client.devCommands = new Collection();
+client.buttons = new Collection();
 client.uptimeTrackerTimestamp = new Date();
 loadEvents(client);
 
