@@ -52,9 +52,7 @@ client.distube = new DisTube(client, {
       emitEventsAfterFetching: true,
     }),
     // new SoundCloudPlugin(),
-    new YtDlpPlugin({
-      emitEventsAfterFetching: true,
-    }),
+    new YtDlpPlugin(),
   ],
 });
 

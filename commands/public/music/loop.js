@@ -34,6 +34,13 @@ export default {
         : "Repeat song"
       : "Off";
     if (!queue) return await interaction.reply("No song in queue");
-    return await interaction.reply(`Set repeat mode to \`${modeMeaning}\``);
+    return await interaction.reply({
+      embeds: [
+        {
+          title: "Looping",
+          description: modeMeaning,
+        },
+      ],
+    });
   },
 };

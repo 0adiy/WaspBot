@@ -23,8 +23,16 @@ export default {
     const queue = client.distube.getQueue(interaction);
     if (!queue)
       return interaction.reply(`There is nothing in the queue right now!`);
-    const time = interaction.options.get("time");
+    const time = interaction.options.get("time").value;
     queue.seek(queue.currentTime + time);
-    interaction.reply(`Forwarded the song for ${time}!`);
+    interaction.reply({
+      embeds: [
+        {
+          title: "Seeked",
+          description: `Forwarded to ${queue.currentTime + time}`,
+          color: 0xeeee00,
+        },
+      ],
+    });
   },
 };

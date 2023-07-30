@@ -21,6 +21,14 @@ export default {
     const volValue = interaction.options.get("value").value;
 
     queue.setVolume(volValue);
-    await interaction.reply(`Volume changed to ${volValue}`);
+    await interaction.reply({
+      embeds: [
+        {
+          title: "Volume",
+          description: `Volume set to ${volValue}`,
+          color: 0xeeee00,
+        },
+      ],
+    });
   },
 };

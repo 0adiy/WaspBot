@@ -15,7 +15,7 @@ export default {
       await interaction.deleteReply();
     } catch (e) {
       console.log(e);
-      return await interaction.reply(`${e}`);
+      return await interaction.editReply(`${e}`);
     }
   },
 };

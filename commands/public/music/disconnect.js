@@ -15,6 +15,14 @@ export default {
    */
   async execute(interaction, client) {
     client.distube.voices.leave(interaction);
-    await interaction.reply("Disconnect");
+    await interaction.reply({
+      embeds: [
+        {
+          title: "Disconnected",
+          description: "Bot has been disconnected from voice channel",
+          color: 0xeeee00,
+        },
+      ],
+    });
   },
 };

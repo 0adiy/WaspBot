@@ -58,7 +58,6 @@ export default {
 
       const row = new ActionRowBuilder().addComponents(previous, skip);
 
-      console.log("hello ji");
       await interaction.editReply({ embeds: [embed], components: [row] });
     } catch (err) {
       return interaction.editReply("```\n" + err + "\n```");

@@ -19,9 +19,23 @@ export default {
     if (!queue) return await interaction.reply("No song in queue");
     if (queue.paused) {
       queue.resume();
-      return interaction.reply("Resumed the song");
+      return interaction.reply({
+        embeds: [
+          {
+            title: "⏩Resumed",
+            description: "Resumed the song",
+          },
+        ],
+      });
     }
     queue.pause();
-    await interaction.reply("Paused the song");
+    await interaction.reply({
+      embeds: [
+        {
+          title: "⏸Paused",
+          description: "Paused the song",
+        },
+      ],
+    });
   },
 };

@@ -17,6 +17,14 @@ export default {
     const queue = client.distube.getQueue(interaction);
     if (!queue) return await interaction.reply("No song in queue");
     queue.shuffle();
-    await interaction.reply(`Queue Shuffled`);
+    await interaction.reply({
+      embeds: [
+        {
+          title: "Shuffled",
+          description: "Shuffled",
+          color: 0xeeee00,
+        },
+      ],
+    });
   },
 };
