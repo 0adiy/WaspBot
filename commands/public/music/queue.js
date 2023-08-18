@@ -3,8 +3,10 @@ import {
   SlashCommandBuilder,
   Client,
   EmbedBuilder,
-  ButtonBuilder,
+  ActionRowBuilder,
 } from "discord.js";
+import previous from "../../../buttons/previous.js";
+import skip from "../../../buttons/skip.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -30,21 +32,12 @@ export default {
               }\``
           )
           .join("\n")
-      );
+      )
+      .setFooter({
+        text: `Current time ${queue.currentTime}`,
+      });
 
-    const skip = new ButtonBuilder()
-      .setCustomId("skip")
-      .setEmoji("⏭️")
-      .setLabel("Skip")
-      .setStyle(ButtonStyle.Secondary);
-
-    const previous = new ButtonBuilder()
-      .setCustomId("previous")
-      .setEmoji("⏮️")
-      .setLabel("Previous")
-      .setStyle(ButtonStyle.Secondary);
-
-    const row = new ActionRowBuilder().addComponents(previous, skip);
+    const row = new ActionRowBuilder().addComponents(previous.data, skip.data);
     await interaction.reply({
       embeds: [embed],
       components: [row],

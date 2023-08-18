@@ -24,6 +24,13 @@ export default {
   async execute(interaction, client) {
     const amt = interaction.options.get("amount").value;
 
+    if (amt > 100) {
+      return interaction.reply({
+        content: "Please enter a no. less than or equal to 100",
+        ephemeral: true,
+      });
+    }
+
     const messages = await interaction.channel.messages.fetch({
       limit: amt,
     });

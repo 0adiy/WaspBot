@@ -15,7 +15,8 @@ export default async function loadButtons(client) {
     const btn = imported.default;
 
     const execute = (...args) => btn.execute(...args, client);
-    client.buttons.set(btn.name, execute);
+    const data = btn.data;
+    client.buttons.set(btn.name, { data, execute });
 
     //formatting
     table.addRow(btn.name, "🟧");

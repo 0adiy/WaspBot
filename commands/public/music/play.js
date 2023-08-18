@@ -2,18 +2,17 @@ import {
   ChatInputCommandInteraction,
   SlashCommandBuilder,
   Client,
-  ButtonBuilder,
   ActionRowBuilder,
-  ButtonStyle,
 } from "discord.js";
-
+import previous from "../../../buttons/previous.js";
+import skip from "../../../buttons/skip.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
 
 export default {
   data: new SlashCommandBuilder()
     .setName("play")
     .setDescription("Add a song to queue")
-    .addStringOption((option) =>
+    .addStringOption(option =>
       option
         .setName("query")
         .setDescription("Name or link of song")
@@ -43,20 +42,10 @@ export default {
       // Embed
       const embed = getSongEmbed(song);
 
-      // Actions
-      const skip = new ButtonBuilder()
-        .setCustomId("skip")
-        .setEmoji("⏭️")
-        .setLabel("Skip")
-        .setStyle(ButtonStyle.Secondary);
-
-      const previous = new ButtonBuilder()
-        .setCustomId("previous")
-        .setEmoji("⏮️")
-        .setLabel("Previous")
-        .setStyle(ButtonStyle.Secondary);
-
-      const row = new ActionRowBuilder().addComponents(previous, skip);
+      const row = new ActionRowBuilder().addComponents(
+        previous.data,
+        skip.data
+      );
 
       await interaction.editReply({ embeds: [embed], components: [row] });
     } catch (err) {
