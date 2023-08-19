@@ -38,8 +38,7 @@ export default {
     } else if (interaction.isButton()) {
       console.log("🔘 Button");
 
-      const btn = client.buttons.get(interaction.customId);
-      const btnFunc = btn.execute;
+      const btnFunc = client.buttons.get(interaction.customId);
       if (!btnFunc) return;
 
       btnFunc(interaction, client);

@@ -1,4 +1,4 @@
-import getSongEmbed from "../functions/songEmbedGen.js";
+import getSongEmbed from "../../functions/songEmbedGen.js";
 import { ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default {
@@ -10,10 +10,24 @@ export default {
     .setStyle(ButtonStyle.Secondary),
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
-    if (!queue) return await interaction.reply("Nothing in Queue to skip");
+    // handling errors
+    if (!queue)
+      return await interaction.reply({
+        content: "Queue doesn't exist",
+        ephemeral: true,
+      });
+
+    if (queue.songs.length === 1)
+      return await interaction.reply({
+        content: "No song in queue ahead",
+        ephemeral: true,
+      });
+
+    // logic
     try {
       await interaction.reply("Skipping...");
       const song = await queue.skip();
+      if (queue.paused) await queue.resume();
       await interaction.message.edit({
         embeds: [getSongEmbed(song)],
       });

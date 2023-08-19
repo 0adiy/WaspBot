@@ -1,5 +1,5 @@
 import { ButtonBuilder, ButtonStyle } from "discord.js";
-import getSongEmbed from "../functions/songEmbedGen.js";
+import getSongEmbed from "../../functions/songEmbedGen.js";
 
 export default {
   name: "previous",
@@ -11,16 +11,29 @@ export default {
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
 
-    if (!queue) return await interaction.reply("No song before current one");
+    // handling errors
+    if (!queue)
+      return await interaction.reply({
+        content: "No song in queue",
+        ephemeral: true,
+      });
+
+    if (queue.previousSongs.length === 0)
+      return await interaction.reply({
+        content: "No song in queue behind",
+        ephemeral: true,
+      });
+
+    // logic
     try {
       await interaction.reply("Going Back...");
       const song = await queue.previous();
+      if (queue.paused) await queue.resume();
       await interaction.message.edit({
         embeds: [getSongEmbed(song)],
       });
       await interaction.deleteReply();
     } catch (e) {
-      console.log(e);
       return await interaction.editReply(`${e}`);
     }
   },

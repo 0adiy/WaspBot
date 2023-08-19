@@ -8,7 +8,7 @@ export default {
   data: new SlashCommandBuilder()
     .setName("skip")
     .setDescription("Skips the song(s)")
-    .addIntegerOption((option) =>
+    .addIntegerOption(option =>
       option.setName("amount").setDescription("Number of songs to skip")
     ),
   /**
@@ -19,7 +19,19 @@ export default {
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
     const amount = interaction.options.get("amount")?.value;
-    if (!queue) return await interaction.reply("No song in queue");
+    // handle errors
+    if (!queue)
+      return await interaction.reply({
+        content: "No song in queue",
+        ephemeral: true,
+      });
+    if (queue.songs.length === 1)
+      return await interaction.reply({
+        content: "No song in queue ahead",
+        ephemeral: true,
+      });
+
+    // logic
     try {
       if (amount) {
         const song = await client.distube.jump(interaction, amount);

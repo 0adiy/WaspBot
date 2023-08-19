@@ -2,10 +2,8 @@ import {
   ChatInputCommandInteraction,
   SlashCommandBuilder,
   Client,
-  ActionRowBuilder,
 } from "discord.js";
-import previous from "../../../buttons/previous.js";
-import skip from "../../../buttons/skip.js";
+import musicOptionsRow from "../../../components/Rows/musicOptionsRow.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
 
 export default {
@@ -25,9 +23,17 @@ export default {
    */
   async execute(interaction, client) {
     const query = interaction.options.get("query").value;
+
+    // Validating
+    const vc = interaction.member.voice.channel;
+    if (!vc)
+      return interaction.reply(
+        "You need to be in a voice channel to use this command"
+      );
+
     await interaction.deferReply();
     try {
-      await client.distube.play(interaction.member.voice.channel, query, {
+      await client.distube.play(vc, query, {
         interaction,
         textChannel: interaction.channel,
         member: interaction.member,
@@ -42,12 +48,10 @@ export default {
       // Embed
       const embed = getSongEmbed(song);
 
-      const row = new ActionRowBuilder().addComponents(
-        previous.data,
-        skip.data
-      );
-
-      await interaction.editReply({ embeds: [embed], components: [row] });
+      await interaction.editReply({
+        embeds: [embed],
+        components: [musicOptionsRow],
+      });
     } catch (err) {
       return interaction.editReply("```\n" + err + "\n```");
     }

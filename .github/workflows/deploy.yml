@@ -1,0 +1,26 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Pull latest changes
+        run: |
+          sshpass -p "${{ secrets.EC2_PASSWORD }}" ssh administrator@44.203.196.59 "cd C:\Users\Administrator\Desktop\waspbot && git pull"
+
+      - name: Restart Node.js app using PM2
+        run: |
+          sshpass -p "${{ secrets.EC2_PASSWORD }}" ssh administrator@44.203.196.59 "pm2 stop wasbot"
+          sshpass -p "${{ secrets.EC2_PASSWORD }}" ssh administrator@44.203.196.59 "pm2 start C:\Users\Administrator\Desktop\waspbot\index.js --name waspbot --interpreter node"

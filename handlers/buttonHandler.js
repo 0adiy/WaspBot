@@ -7,7 +7,7 @@ export default async function loadButtons(client) {
   // clear all buttons first
   await client.buttons.clear();
   // Load all the files from buttons folder
-  const Files = await loadFiles("buttons");
+  const Files = await loadFiles("components/buttons");
 
   for (const file of Files) {
     // importing button files
@@ -15,8 +15,8 @@ export default async function loadButtons(client) {
     const btn = imported.default;
 
     const execute = (...args) => btn.execute(...args, client);
-    const data = btn.data;
-    client.buttons.set(btn.name, { data, execute });
+    console.log(btn.execute, "loaded");
+    client.buttons.set(btn.name, execute);
 
     //formatting
     table.addRow(btn.name, "🟧");

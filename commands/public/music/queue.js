@@ -3,10 +3,8 @@ import {
   SlashCommandBuilder,
   Client,
   EmbedBuilder,
-  ActionRowBuilder,
 } from "discord.js";
-import previous from "../../../buttons/previous.js";
-import skip from "../../../buttons/skip.js";
+import musicOptionsRow from "../../../components/Rows/musicOptionsRow.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -19,7 +17,11 @@ export default {
    */
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
-    if (!queue) return await interaction.reply("No song in queue");
+    if (!queue)
+      return await interaction.reply({
+        content: "No song in queue",
+        ephemeral: true,
+      });
     const embed = new EmbedBuilder()
       .setColor(0xeeee00)
       .setTitle("Server Queue")
@@ -37,10 +39,9 @@ export default {
         text: `Current time ${queue.currentTime}`,
       });
 
-    const row = new ActionRowBuilder().addComponents(previous.data, skip.data);
     await interaction.reply({
       embeds: [embed],
-      components: [row],
+      components: [musicOptionsRow],
     });
   },
 };

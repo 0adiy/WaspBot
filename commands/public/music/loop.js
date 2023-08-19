@@ -8,7 +8,7 @@ export default {
   data: new SlashCommandBuilder()
     .setName("loop")
     .setDescription("loops the queue")
-    .addIntegerOption((option) =>
+    .addIntegerOption(option =>
       option
         .setName("mode")
         .setDescription("Select the mode of repeat")
@@ -27,13 +27,18 @@ export default {
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
     const mode = interaction.options.get("mode").value;
-    console.log(`mode recived from user : ${mode}`);
     const modeMeaning = mode
       ? mode === 2
         ? "Repeat queue"
         : "Repeat song"
       : "Off";
-    if (!queue) return await interaction.reply("No song in queue");
+    if (!queue)
+      return await interaction.reply({
+        content: "Queue doesn't exist",
+        ephemeral: true,
+      });
+
+    queue.setRepeatMode(mode);
     return await interaction.reply({
       embeds: [
         {

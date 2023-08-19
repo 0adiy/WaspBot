@@ -15,7 +15,19 @@ export default {
    */
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
-    if (!queue) return await interaction.reply("No song in queue");
+    // handle errors
+    if (!queue)
+      return await interaction.reply({
+        content: "No song in queue",
+        ephemeral: true,
+      });
+    if (queue.previousSongs.length === 0)
+      return await interaction.reply({
+        content: "No song in queue behind",
+        ephemeral: true,
+      });
+
+    // logic
     try {
       const song = await queue.previous();
       return await interaction.reply(`Now playing:\n${song.name}`);
