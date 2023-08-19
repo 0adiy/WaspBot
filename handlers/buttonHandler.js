@@ -15,7 +15,6 @@ export default async function loadButtons(client) {
     const btn = imported.default;
 
     const execute = (...args) => btn.execute(...args, client);
-    console.log(btn.execute, "loaded");
     client.buttons.set(btn.name, execute);
 
     //formatting

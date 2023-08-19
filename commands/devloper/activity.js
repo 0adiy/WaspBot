@@ -10,7 +10,7 @@ export default {
     .setName("activity")
     .setDescription("Sets the bot's activity")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-    .addStringOption((option) =>
+    .addStringOption(option =>
       option
         .setName("status")
         .setDescription("Status of the new activity")
@@ -22,7 +22,7 @@ export default {
           { name: "Invisible", value: "invisible" }
         )
     )
-    .addStringOption((option) =>
+    .addStringOption(option =>
       option
         .setName("type")
         .setDescription("Type of the new activity")
@@ -35,13 +35,13 @@ export default {
           { name: "Competing", value: "5" }
         )
     )
-    .addStringOption((option) =>
+    .addStringOption(option =>
       option
         .setName("name")
         .setDescription("Name of the new activity")
         .setRequired(true)
     )
-    .addStringOption((option) =>
+    .addStringOption(option =>
       option.setName("url").setDescription("URL of the new activity")
     ),
   /**
@@ -56,8 +56,6 @@ export default {
     const url =
       interaction.options.get("url")?.value ||
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-
-    console.log(name, type, status, url);
 
     client.user.setPresence({
       status: status,

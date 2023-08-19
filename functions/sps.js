@@ -33,9 +33,8 @@ function sps(choice) {
   if (finalResult == results[2])
     returnValue = makeEmbed("You Lost!", 0xff0000, moves[choice], moves[b]);
 
-  console.log(moves[choice] + "\n" + moves[b]);
-
   return returnValue;
 }
 
 export default sps;
+
