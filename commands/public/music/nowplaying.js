@@ -4,7 +4,7 @@ import {
   Client,
 } from "discord.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
-import musicOptionsRow from "../../../components/Rows/musicOptionsRow.js";
+import { musicOptionsRow } from "../../../components/Rows/musicOptionsRow.js";
 
 export default {
   data: new SlashCommandBuilder()

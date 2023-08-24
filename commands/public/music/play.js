@@ -3,7 +3,7 @@ import {
   SlashCommandBuilder,
   Client,
 } from "discord.js";
-import musicOptionsRow from "../../../components/Rows/musicOptionsRow.js";
+import { musicOptionsRow } from "../../../components/Rows/musicOptionsRow.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
 
 export default {
