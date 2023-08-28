@@ -27,6 +27,7 @@
     "ffmpeg-static": "^4.4.1",
     "glob": "^8.0.3",
     "lodash": "^4.17.21",
+    "mongoose": "^7.4.5",
     "opusscript": "^0.0.8",
     "sodium": "^3.0.2"
   },

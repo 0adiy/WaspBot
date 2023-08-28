@@ -2,11 +2,11 @@ import getSongEmbed from "../../functions/songEmbedGen.js";
 import { ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default {
-  name: "skip",
+  name: "next",
   data: new ButtonBuilder()
-    .setCustomId("skip")
+    .setCustomId("next")
     .setEmoji("⏭️")
-    .setLabel("Skip")
+    .setLabel("Next")
     .setStyle(ButtonStyle.Secondary),
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
