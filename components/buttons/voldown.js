@@ -16,6 +16,7 @@ export default {
       });
 
     if (queue.volume >= 20) queue.setVolume(queue.volume - 20);
+    else queue.setVolume(0);
     interaction.reply({
       embeds: [
         {

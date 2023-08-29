@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 const { Schema, model, models } = mongoose;
 
+const urlRegex =
+  /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
 const favPlaylistSchema = new Schema(
   {
     _id: {
@@ -10,9 +13,17 @@ const favPlaylistSchema = new Schema(
     },
     favouritePlaylist: {
       // Array of URLs
-      type: Array,
+      type: [String],
       required: true,
-      unique: true,
+      // unique: true,
+      validate: {
+        // Checking for valid urls
+        validator: function (v) {
+          return v.every(url => urlRegex.test(url));
+        },
+        message: props =>
+          `Invalid URL found in favouritePlaylist: ${props.value}`,
+      },
     },
   },
   {
