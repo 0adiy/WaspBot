@@ -5,16 +5,15 @@ import favPlaylistSchema from "../../../models/favPlaylistSchema.js";
 export default {
   data: new SlashCommandBuilder()
     .setName("favlist")
-    .addSubcommand(subcommand =>
-      subcommand
-        .setName("add")
-        .setDescription("Add Queue songs to favourite playlist")
+    .setDescription("Manage favourite playlist")
+    .addSubcommand(cmd =>
+      cmd.setName("add").setDescription("Add Queue songs to favourite playlist")
     )
-    .addSubcommand(subcommand =>
-      subcommand.setName("clear").setDescription("Clear favourite playlist")
+    .addSubcommand(cmd =>
+      cmd.setName("clear").setDescription("Clear favourite playlist")
     )
-    .addSubcommand(subcommand =>
-      subcommand.setName("show").setDescription("Show favourite playlist")
+    .addSubcommand(cmd =>
+      cmd.setName("show").setDescription("Show favourite playlist")
     ),
 
   async execute(interaction, client) {
@@ -51,8 +50,6 @@ async function add(interaction, client) {
     doc = new favPlaylistSchema({ _id: interaction.user.id });
   }
   doc.favouritePlaylist.addToSet(...playlist);
-
-  console.log(doc, " doc");
   await doc?.save();
 
   interaction.reply({
