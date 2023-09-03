@@ -1,9 +1,6 @@
 import chalk from "chalk";
 import config from "../config.js";
 
-// Setting SuperUsers and prefix
-const prefix = "^";
-
 function hello() {
   const greetings = ["Hi Super! 😎", "Hi Super User! 🤙", "Greetings 🤓"];
   return greetings[Math.floor(Math.random() * greetings.length)];
@@ -33,12 +30,12 @@ export default async function messageCreateHandler(message) {
   ];
 
   if (
-    !message.content.startsWith(prefix) ||
+    !message.content.startsWith(config.prefix) ||
     message.author.bot ||
     !config.superUsersArray.includes(message.author.id)
   )
     return;
-  const msg = message.content.slice(prefix.length);
+  const msg = message.content.slice(config.prefix.length);
 
   // OLD REGEX
   const command = /^\w+/.exec(msg)[0].toLowerCase();
