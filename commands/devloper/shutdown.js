@@ -1,5 +1,6 @@
 import process from "process";
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { PermissionFlagsBits } from "discord.js";
 
 export default {
   data: new SlashCommandBuilder()
