@@ -1,15 +1,10 @@
 import { Routes, REST } from "discord.js";
-
+import config from "../config.js";
 import loadFiles from "../functions/fileLoader.js";
 import ascii from "ascii-table";
 
-// setting up env variables
-const TOKEN = process.env["TOKEN"];
-const CLIENT_ID = process.env["CLIENT_ID"];
-const GUILD_ID = process.env["GUILD_ID_WaspbotDev"];
-
 //setting up REST for discord
-const rest = new REST({ version: "10" }).setToken(TOKEN);
+const rest = new REST({ version: "10" }).setToken(config.TOKEN);
 
 async function loadPublicCommands(client) {
   // table for formatted printing
@@ -33,7 +28,7 @@ async function loadPublicCommands(client) {
     table.addRow(command.data.name, "🟩");
   }
 
-  await rest.put(Routes.applicationCommands(CLIENT_ID), {
+  await rest.put(Routes.applicationCommands(config.CLIENT_ID), {
     body: publicCommandsArray,
   });
 
@@ -63,9 +58,12 @@ async function loadDevCommands(client) {
     table.addRow(command.data.name, "🟨");
   }
 
-  await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-    body: devCommandsArray,
-  });
+  await rest.put(
+    Routes.applicationGuildCommands(config.CLIENT_ID, config.devServer),
+    {
+      body: devCommandsArray,
+    }
+  );
   return console.log(table.toString(), "\nCommands loaded");
 }
 
@@ -73,10 +71,10 @@ async function removeGlobalCommands(client) {
   try {
     console.log("Started removing commands");
 
-    rest.get(Routes.applicationCommands(CLIENT_ID)).then((data) => {
+    rest.get(Routes.applicationCommands(config.CLIENT_ID)).then(data => {
       const promises = [];
       for (const command of data) {
-        const deleteUrl = `${Routes.applicationCommands(CLIENT_ID)}/${
+        const deleteUrl = `${Routes.applicationCommands(config.CLIENT_ID)}/${
           command.id
         }`;
         promises.push(rest.delete(deleteUrl));

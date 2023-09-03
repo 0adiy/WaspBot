@@ -1,11 +1,5 @@
 import { ChatInputCommandInteraction, Client, Events } from "discord.js";
-
-const SuperUsers = [
-  process.env["SU_Bisskut"],
-  process.env["SU_Shazam"],
-  process.env["SU_Kuro"],
-  process.env["SU_Rockstar"],
-];
+import config from "../../config.js";
 
 export default {
   name: Events.InteractionCreate,
@@ -28,7 +22,10 @@ export default {
           ephemeral: true,
         });
 
-      if (command.devloper && !SuperUsers.includes(interaction.user.id))
+      if (
+        command.devloper &&
+        !config.superUsersArray.includes(interaction.user.id)
+      )
         return interaction.reply({
           content: "This is for devs 🤓",
           ephemeral: true,

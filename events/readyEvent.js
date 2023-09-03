@@ -4,7 +4,6 @@ import {
   loadDevCommands,
 } from "../handlers/slashCommandHandler.js";
 import loadButtons from "../handlers/buttonHandler.js";
-import mongoose from "mongoose";
 
 export default {
   name: Events.ClientReady,
@@ -16,13 +15,5 @@ export default {
     loadPublicCommands(client);
     loadDevCommands(client);
     loadButtons(client);
-
-    // Connecting to MongoDB
-    mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      keepAlive: true,
-    });
-    console.log("Connected to MongoDB");
   },
 };

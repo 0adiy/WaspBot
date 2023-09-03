@@ -1,4 +1,7 @@
 import { Client, GatewayIntentBits, Partials, Collection } from "discord.js";
+import mongoose from "mongoose";
+import config from "./config.js";
+
 import { DisTube } from "distube";
 import { SpotifyPlugin } from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
@@ -6,9 +9,6 @@ import { YtDlpPlugin } from "@distube/yt-dlp";
 
 import loadEvents from "./handlers/eventHandler.js";
 import messageCreateHandler from "./handlers/messageCreateHandler.js";
-
-import dotenv from "dotenv"; // For Environment variables
-dotenv.config();
 
 // making new client
 const client = new Client({
@@ -33,9 +33,6 @@ const client = new Client({
   },
 });
 
-//setting up env variables
-const TOKEN = process.env["TOKEN"];
-
 client.events = new Collection();
 client.publicCommands = new Collection();
 client.devCommands = new Collection();
@@ -56,8 +53,17 @@ client.distube = new DisTube(client, {
   ],
 });
 
+// Connecting to MongoDB
+mongoose
+  .connect(config.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB"));
+
 // TODO: Better Messages handler for normal messages
 client.on("messageCreate", messageCreateHandler);
 
 // Turning it on
-client.login(TOKEN);
+client.login(config.TOKEN);
+

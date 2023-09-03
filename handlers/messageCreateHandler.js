@@ -1,18 +1,8 @@
 import chalk from "chalk";
-
-// For Environment variables
-import dotenv from "dotenv";
-dotenv.config();
+import config from "../config.js";
 
 // Setting SuperUsers and prefix
 const prefix = "^";
-const SuperUsers = [
-  process.env["SU_Bisskut"],
-  process.env["SU_Shazam"],
-  process.env["SU_Kuro"],
-  process.env["SU_Rockstar"],
-  process.env["SU_Riley"],
-];
 
 function hello() {
   const greetings = ["Hi Super! 😎", "Hi Super User! 🤙", "Greetings 🤓"];
@@ -45,7 +35,7 @@ export default async function messageCreateHandler(message) {
   if (
     !message.content.startsWith(prefix) ||
     message.author.bot ||
-    !SuperUsers.includes(message.author.id)
+    !config.superUsersArray.includes(message.author.id)
   )
     return;
   const msg = message.content.slice(prefix.length);
