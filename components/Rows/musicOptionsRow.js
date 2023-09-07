@@ -6,6 +6,7 @@ import shuffle from "../buttons/shuffle.js";
 import repeatMode from "../buttons/repeatMode.js";
 import voldown from "../buttons/voldown.js";
 import volup from "../buttons/volup.js";
+import favorite from "../buttons/favorite.js";
 
 const musicOptionsRow = new ActionRowBuilder().addComponents(
   shuffle.data,
@@ -17,7 +18,8 @@ const musicOptionsRow = new ActionRowBuilder().addComponents(
 
 const musicOptionsRow2 = new ActionRowBuilder().addComponents(
   voldown.data,
-  volup.data
+  volup.data,
+  favorite.data
 );
 
 export { musicOptionsRow, musicOptionsRow2 };
