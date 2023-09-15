@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import config from "../config.js";
+import process from "process";
 
 function hello() {
   const greetings = ["Hi Super! 😎", "Hi Super User! 🤙", "Greetings 🤓"];
@@ -69,5 +70,9 @@ export default async function messageCreateHandler(message) {
       await message.channel.send("```\n" + result + "\n```");
     }
     result = "";
+  }
+
+  if (command == "shutdown") {
+    process.exit();
   }
 }

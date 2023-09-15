@@ -10,7 +10,7 @@ export default {
     .setName("purge")
     .setDescription("Purge messages")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
-    .addIntegerOption((option) =>
+    .addIntegerOption(option =>
       option
         .setName("amount")
         .setDescription("Amount of messages to delete")
@@ -35,7 +35,7 @@ export default {
       limit: amt,
     });
     try {
-      messages.forEach(async (m) => await m.delete());
+      messages.forEach(m => m.delete());
     } catch (error) {
       interaction.reply({
         content: `An error occured while purging messages, probably because the bot lacks the permission to delete certain messages`,

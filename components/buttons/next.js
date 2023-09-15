@@ -1,5 +1,6 @@
 import getSongEmbed from "../../functions/songEmbedGen.js";
 import { ButtonBuilder, ButtonStyle } from "discord.js";
+import { ChatInputCommandInteraction, Client, Events } from "discord.js";
 
 export default {
   name: "next",
@@ -8,6 +9,11 @@ export default {
     .setEmoji("⏭️")
     .setLabel("Next")
     .setStyle(ButtonStyle.Secondary),
+  /**
+   *
+   * @param {ChatInputCommandInteraction} interaction - the interaction object
+   * @param {Client} client - the client object
+   */
   async execute(interaction, client) {
     const queue = client.distube.getQueue(interaction);
     // handling errors
