@@ -18,6 +18,7 @@ export default {
         .setName("query")
         .setDescription("Name or link of song")
         .setRequired(true)
+        .setAutocomplete(true)
     ),
   /**
    *
@@ -58,5 +59,16 @@ export default {
     } catch (err) {
       return interaction.editReply("```\n" + err + "\n```");
     }
+  },
+  async autocomplete(interaction, client) {
+    const focusedValue = interaction.options.getFocused();
+
+    if (!focusedValue) return;
+
+    const videosList = await client.distube.search(focusedValue);
+
+    await interaction.respond(
+      videosList.map(v => ({ name: v.name, value: v.url }))
+    );
   },
 };

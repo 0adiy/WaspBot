@@ -39,6 +39,9 @@ export default {
       if (!btnFunc) return;
 
       btnFunc(interaction, client);
+    } else if (interaction.isAutocomplete()) {
+      const command = client.publicCommands.get(interaction.commandName);
+      command?.autocomplete(interaction, client);
     } else if (interaction.isStringSelectMenu()) {
       console.log("🔘 String Select Menu");
     }

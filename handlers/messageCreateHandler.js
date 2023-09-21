@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import config from "../config.js";
 import process from "process";
+import { ActionRowBuilder } from "discord.js";
+import deleteBtn from "../components/buttons/delete.js";
 
 function hello() {
   const greetings = ["Hi Super! 😎", "Hi Super User! 🤙", "Greetings 🤓"];
@@ -67,7 +69,11 @@ export default async function messageCreateHandler(message) {
     }
 
     if (result) {
-      await message.channel.send("```\n" + result + "\n```");
+      const deleteBtnRow = new ActionRowBuilder().addComponents(deleteBtn.data);
+      await message.channel.send({
+        content: "```\n" + result + "\n```",
+        components: [deleteBtnRow],
+      });
     }
     result = "";
   }
