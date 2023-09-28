@@ -68,7 +68,10 @@ export default {
     const videosList = await client.distube.search(focusedValue);
 
     await interaction.respond(
-      videosList.map(v => ({ name: v.name, value: v.url }))
+      videosList.map(v => ({
+        name: `${v.formattedDuration} ${v.name}`,
+        value: v.url,
+      }))
     );
   },
 };
