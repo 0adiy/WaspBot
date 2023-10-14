@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema, model, models } = mongoose;
 
 const urlRegex =
-  /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+  /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
 
 const favPlaylistSchema = new Schema(
   {
