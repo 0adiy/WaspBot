@@ -9,15 +9,16 @@ import volup from "../buttons/volup.js";
 import favorite from "../buttons/favorite.js";
 
 const musicOptionsRow = new ActionRowBuilder().addComponents(
-  favorite.data,
+  voldown.data,
   previous.data,
   pause.data,
   next.data,
+  volup.data
 );
 
 const musicOptionsRow2 = new ActionRowBuilder().addComponents(
-  voldown.data,
-  volup.data,
+  favorite.data,
+  shuffle.data,
   repeatMode.data
 );
 

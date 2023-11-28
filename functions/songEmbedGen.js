@@ -24,6 +24,6 @@ export default function getSongEmbed(song) {
           inline: true,
         }
       )
-      .setColor(0x0099ff)
+      .setColor(0x1587a8)
   );
 }
