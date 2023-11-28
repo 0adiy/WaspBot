@@ -4,7 +4,7 @@ export default {
   name: "repeatMode",
   data: new ButtonBuilder()
     .setCustomId("repeatMode")
-    .setEmoji("<:repeatarrow:1179119259276820500>")
+    .setEmoji("<:repeatarrow:1179139149966614608>")
     .setLabel("Repeat Mode")
     .setStyle(ButtonStyle.Secondary),
 
@@ -29,7 +29,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
+            title: "<:repeatarrow:1179139149966614608> Repeat Mode",
             description: nextModeMeaning,
           },
         ],
@@ -39,7 +39,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
+            title: "<:repeatarrow:1179139149966614608> Repeat Mode",
             description: nextModeMeaning,
           },
         ],
@@ -49,7 +49,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
+            title: "<:repeatarrow:1179139149966614608> Repeat Mode",
             description: nextModeMeaning,
           },
         ],

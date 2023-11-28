@@ -6,7 +6,7 @@ export default {
   name: "next",
   data: new ButtonBuilder()
     .setCustomId("next")
-    .setEmoji("<:next:1179117664023629854>")
+    .setEmoji("<:forwardarrow:1179139624954769490>")
     .setLabel("Next")
     .setStyle(ButtonStyle.Secondary),
   /**

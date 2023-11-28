@@ -4,7 +4,7 @@ export default {
   name: "volup",
   data: new ButtonBuilder()
     .setCustomId("volup")
-    .setEmoji("<:volup:1179120229545156689>")
+    .setEmoji("<:volup:1179138524373602304>")
     .setLabel("+20")
     .setStyle("Secondary"),
   execute(interaction, client) {
@@ -19,7 +19,7 @@ export default {
     interaction.reply({
       embeds: [
         {
-          title: "<:volup:1179120229545156689> Volume",
+          title: "<:volup:1179138524373602304> Volume",
           description: `${queue.volume}`,
         },
       ],

@@ -4,7 +4,7 @@ export default {
   name: "pause",
   data: new ButtonBuilder()
     .setCustomId("pause")
-    .setEmoji("<:pause:1179118800164093992>")
+    .setEmoji("<:pause:1179139332116860938>")
     .setLabel("Pause")
     .setStyle(ButtonStyle.Secondary),
 
@@ -22,7 +22,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "<:play:1179113883567390903> Resumed",
+            title: "<:playcircle:1179140527996805152> Resumed",
             description: "Resumed the song",
           },
         ],
@@ -32,7 +32,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "<:pause:1179118800164093992> Paused",
+            title: "<:pause:1179139332116860938> Paused",
             description: "Paused the song",
           },
         ],

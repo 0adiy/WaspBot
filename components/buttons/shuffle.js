@@ -4,7 +4,7 @@ export default {
   name: "shuffle",
   data: new ButtonBuilder()
     .setCustomId("shuffle")
-    .setEmoji("<:shuffle:1179114919816347668>")
+    .setEmoji("<:shuffle:1179140109531095040>")
     .setLabel("Shuffle")
     .setStyle(ButtonStyle.Secondary),
 
@@ -22,7 +22,7 @@ export default {
     await interaction.reply({
       embeds: [
         {
-          title: "<:shuffle:1179114919816347668> Shuffled",
+          title: "<:shuffle:1179140109531095040> Shuffled",
           description: "Shuffled the playlist",
         },
       ],

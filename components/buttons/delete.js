@@ -4,7 +4,7 @@ export default {
   name: "delete",
   data: new ButtonBuilder()
     .setCustomId("delete")
-    .setEmoji("<:bts:1179116627292323840>")
+    .setEmoji("<:blackpink:1179139928119054468>")
     .setLabel("Delete")
     .setStyle(ButtonStyle.Secondary),
   /**
