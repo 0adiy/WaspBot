@@ -69,8 +69,7 @@ export default {
 
     await interaction.respond(
       videosList.map(v => {
-        const title =
-          v.name.length > 100 ? `${v.name.slice(0, 100)}...` : v.name;
+        const title = v.name.length > 90 ? `${v.name.slice(0, 90)}...` : v.name;
         return {
           name: `${v.formattedDuration} ${title}`,
           value: v.url,
