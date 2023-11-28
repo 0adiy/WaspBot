@@ -20,7 +20,7 @@ export default {
     interaction.reply({
       embeds: [
         {
-          title: "🔊 Volume",
+          title: "<:volup:1179120229545156689> Volume",
           description: `${queue.volume}`,
         },
       ],

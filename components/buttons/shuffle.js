@@ -22,7 +22,7 @@ export default {
     await interaction.reply({
       embeds: [
         {
-          title: "🔀 Shuffled",
+          title: "<:shuffle:1179114919816347668> Shuffled",
           description: "Shuffled the playlist",
         },
       ],

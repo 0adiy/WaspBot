@@ -29,7 +29,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "🔂 Repeat Mode",
+            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
             description: nextModeMeaning,
           },
         ],
@@ -39,7 +39,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "🔁 Repeat Mode",
+            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
             description: nextModeMeaning,
           },
         ],
@@ -49,7 +49,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "🔁 Repeat Mode",
+            title: "<:repeatarrow:1179119259276820500> Repeat Mode",
             description: nextModeMeaning,
           },
         ],

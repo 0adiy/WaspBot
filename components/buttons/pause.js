@@ -22,7 +22,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "⏯️ Resumed",
+            title: "<:play:1179113883567390903> Resumed",
             description: "Resumed the song",
           },
         ],
@@ -32,7 +32,7 @@ export default {
       await interaction.reply({
         embeds: [
           {
-            title: "⏸ Paused",
+            title: "<:pause:1179118800164093992> Paused",
             description: "Paused the song",
           },
         ],
