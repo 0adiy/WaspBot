@@ -4,9 +4,9 @@ export default {
   name: "delete",
   data: new ButtonBuilder()
     .setCustomId("delete")
-    .setEmoji("🗑️")
+    .setEmoji("<:bts:1179116627292323840>")
     .setLabel("Delete")
-    .setStyle(ButtonStyle.Danger),
+    .setStyle(ButtonStyle.Secondary),
   /**
    *
    * @param {ChatInputCommandInteraction} interaction

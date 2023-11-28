@@ -4,7 +4,7 @@ export default {
   name: "volup",
   data: new ButtonBuilder()
     .setCustomId("volup")
-    .setEmoji("🔊")
+    .setEmoji("<:volup:1179120229545156689>")
     .setLabel("+20")
     .setStyle("Secondary"),
   execute(interaction, client) {

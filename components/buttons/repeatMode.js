@@ -4,7 +4,7 @@ export default {
   name: "repeatMode",
   data: new ButtonBuilder()
     .setCustomId("repeatMode")
-    .setEmoji("🔂")
+    .setEmoji("<:repeatarrow:1179119259276820500>")
     .setLabel("Repeat Mode")
     .setStyle(ButtonStyle.Secondary),
 

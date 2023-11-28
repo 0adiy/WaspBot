@@ -6,7 +6,7 @@ export default {
   name: "next",
   data: new ButtonBuilder()
     .setCustomId("next")
-    .setEmoji("⏭️")
+    .setEmoji("<:next:1179117664023629854>")
     .setLabel("Next")
     .setStyle(ButtonStyle.Secondary),
   /**

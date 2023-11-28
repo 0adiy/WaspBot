@@ -5,7 +5,7 @@ export default {
   name: "previous",
   data: new ButtonBuilder()
     .setCustomId("previous")
-    .setEmoji("⏮️")
+    .setEmoji("<:backarrow:1179117946228965509>")
     .setLabel("Previous")
     .setStyle(ButtonStyle.Secondary),
   async execute(interaction, client) {

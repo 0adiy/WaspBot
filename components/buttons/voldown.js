@@ -4,7 +4,7 @@ export default {
   name: "voldown",
   data: new ButtonBuilder()
     .setCustomId("voldown")
-    .setEmoji("🔉")
+    .setEmoji("<:voldown:1179119747791593623>")
     .setLabel("-20")
     .setStyle("Secondary"),
   execute(interaction, client) {

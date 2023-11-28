@@ -4,7 +4,7 @@ export default {
   name: "pause",
   data: new ButtonBuilder()
     .setCustomId("pause")
-    .setEmoji("⏸")
+    .setEmoji("<:pause:1179118800164093992>")
     .setLabel("Pause")
     .setStyle(ButtonStyle.Secondary),
 

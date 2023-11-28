@@ -5,7 +5,7 @@ export default {
   name: "favorite",
   data: new ButtonBuilder()
     .setCustomId("favorite")
-    .setEmoji("🌟")
+    .setEmoji("<:favourite:1179117030612422737>")
     .setLabel("Favorite")
     .setStyle(ButtonStyle.Secondary),
   async execute(interaction, client) {

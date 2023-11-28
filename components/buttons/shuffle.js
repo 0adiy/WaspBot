@@ -4,7 +4,7 @@ export default {
   name: "shuffle",
   data: new ButtonBuilder()
     .setCustomId("shuffle")
-    .setEmoji("🔀")
+    .setEmoji("<:shuffle:1179114919816347668>")
     .setLabel("Shuffle")
     .setStyle(ButtonStyle.Secondary),
 
