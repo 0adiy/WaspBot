@@ -65,6 +65,9 @@ export default {
 
     if (!focusedValue) return;
 
+    /**
+     * @type {import("distube").SearchResult[]}
+     */
     const videosList = await client.distube.search(focusedValue);
 
     await interaction.respond(
