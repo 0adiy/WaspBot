@@ -1,4 +1,9 @@
-import { ButtonBuilder, ButtonInteraction, ButtonStyle, Client } from "discord.js";
+import {
+  ButtonBuilder,
+  ButtonInteraction,
+  ButtonStyle,
+  Client,
+} from "discord.js";
 import { EmbedBuilder } from "discord.js";
 import axios from "axios";
 import { load } from "cheerio";
@@ -9,9 +14,9 @@ async function getSongLink(songName, artistName) {
   let responseData = { status: 400, song: null };
   try {
     const response = await fetch(
-      `${api.endpoint}?uid=${api.user_id}&tokenid=${api.token}&term=${encodeURIComponent(
-        songName,
-      )}&format=${api.format}`,
+      `${api.endpoint}?uid=${api.user_id}&tokenid=${
+        api.token
+      }&term=${encodeURIComponent(songName)}&format=${api.format}`
     );
     const responseBody = await response.text();
     if (responseBody == "{}") {
@@ -21,9 +26,9 @@ async function getSongLink(songName, artistName) {
       let result = jsonData.result;
       responseData.status = 200;
       let artistNames = artistName.toLowerCase().split(" ");
-      responseData.song = result.find((song) => {
+      responseData.song = result.find(song => {
         let artist = song.artist.toLowerCase();
-        return artistNames.some((name) => artist.includes(name));
+        return artistNames.some(name => artist.includes(name));
       });
       if (!responseData.song) {
         responseData.song = result[0];
@@ -64,7 +69,7 @@ export default {
   data: new ButtonBuilder()
     .setCustomId("lyrics")
     .setEmoji("<:lyrics:1234522617977765968>")
-    .setLabel("lyrics")
+    .setLabel("Lyrics")
     .setStyle(ButtonStyle.Secondary),
   /**
    *
@@ -81,7 +86,8 @@ export default {
     const songTitle = embed.title.split(/[-|()]/); //assume string is "America - A Horse With No Name (Official Audio)"
     // assume songTitle = ["America", "A Horse With No Name", "Official Audio"]
     if (songTitle.length > 2) {
-      songName = songTitle[0].length > songTitle[1].length ? songTitle[0] : songTitle[1];
+      songName =
+        songTitle[0].length > songTitle[1].length ? songTitle[0] : songTitle[1];
     } else {
       songName = songTitle[0];
     }
@@ -106,7 +112,7 @@ export default {
           name: "Query",
           value: songName,
           inline: false,
-        },
+        }
       );
     await interaction.editReply({ embeds: [responseEmbed.toJSON()] });
   },

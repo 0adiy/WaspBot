@@ -7,7 +7,7 @@ import getSongEmbed from "../../../functions/songEmbedGen.js";
 import {
   musicOptionsRow,
   musicOptionsRow2,
-} from "../../../components/Rows/musicOptiooh it'nsRow.js";
+} from "../../../components/Rows/musicOptionsRow.js";
 
 export default {
   data: new SlashCommandBuilder()
