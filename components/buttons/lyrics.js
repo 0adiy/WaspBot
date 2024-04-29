@@ -86,7 +86,7 @@ export default {
       songName = songTitle[0];
     }
 
-    const request = await getSongLyrics(songName, embed.fields[2].value);
+    const request = await getSongLyrics(songName.trim(), embed.fields[2].value);
     if (request.status == 404) {
       return interaction.editReply(`No lyrics available. Query: ${songName}`);
     }
