@@ -71,8 +71,20 @@ export default {
     .setLabel("lyrics")
     .setStyle(ButtonStyle.Secondary),
   async execute(interaction, client) {
+    interaction.deferReply();
     const embed = await interaction.message.embeds[0];
-    const request = await getSongLyrics(embed.title, embed.fields[2].value);
+    // REVIEW - Move this processing to the function itself?
+    let songName;
+    //split string at - | (
+    const songTitle = embed.title.split(/[-|()]/); //assume string is "America - A Horse With No Name (Official Audio)"
+    // assume songTitle = ["America", "A Horse With No Name", "Official Audio"]
+    if (songTitle.length > 2) {
+      songName = songTitle[0].length > songTitle[1].length ? songTitle[0] : songTitle[1];
+    } else {
+      songName = songTitle[0];
+    }
+
+    const request = await getSongLyrics(songName, embed.fields[2].value);
     if (request.status == 404) {
       return interaction.reply("No lyrics available.");
     }
@@ -89,6 +101,7 @@ export default {
           value: song.album,
           inline: false,
         },
+        { name: "Query", value: songName, inline: false },
       );
     await interaction.reply({ embeds: [responseEmbed] });
   },
