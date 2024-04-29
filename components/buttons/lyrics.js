@@ -1,21 +1,22 @@
-import { ButtonBuilder, ButtonStyle } from "discord.js";
+import {
+  ButtonBuilder,
+  ButtonInteraction,
+  ButtonStyle,
+  Client,
+} from "discord.js";
 import { EmbedBuilder } from "discord.js";
 import axios from "axios";
 import { load } from "cheerio";
+import config from "../../config.js";
 
 async function getSongLink(songName, artistName) {
-  const api = {
-    endpoint: "xxxxxxxxxxxxx",
-    user_id: "xxxxx",
-    token: "xxxxxxxxxx",
-    format: "json",
-  };
+  const api = config.apis.lyrics_api;
   let responseData = { status: 400, song: null };
   try {
     const response = await fetch(
-      `${api.endpoint}?uid=${api.user_id}&tokenid=${api.token}&term=${encodeURIComponent(
-        songName,
-      )}&format=${api.format}`,
+      `${api.endpoint}?uid=${api.user_id}&tokenid=${
+        api.token
+      }&term=${encodeURIComponent(songName)}&format=${api.format}`
     );
     const responseBody = await response.text();
     if (responseBody == "{}") {
@@ -25,9 +26,9 @@ async function getSongLink(songName, artistName) {
       let result = jsonData.result;
       responseData.status = 200;
       let artistNames = artistName.toLowerCase().split(" ");
-      responseData.song = result.find((song) => {
+      responseData.song = result.find(song => {
         let artist = song.artist.toLowerCase();
-        return artistNames.some((name) => artist.includes(name));
+        return artistNames.some(name => artist.includes(name));
       });
       if (!responseData.song) {
         responseData.song = result[0];
@@ -70,11 +71,18 @@ export default {
     .setEmoji("<:lyrics:1234522617977765968>")
     .setLabel("lyrics")
     .setStyle(ButtonStyle.Secondary),
+  /**
+   *
+   * @param {ButtonInteraction} interaction
+   * @param {Client} client
+   * @returns
+   */
   async execute(interaction, client) {
+    interaction.deferReply();
     const embed = await interaction.message.embeds[0];
     const request = await getSongLyrics(embed.title, embed.fields[2].value);
     if (request.status == 404) {
-      return interaction.reply("No lyrics available.");
+      return interaction.editReply("No lyrics available.");
     }
     const song = request.song;
     const responseEmbed = new EmbedBuilder()
@@ -88,8 +96,8 @@ export default {
           name: "Album",
           value: song.album,
           inline: false,
-        },
+        }
       );
-    await interaction.reply({ embeds: [responseEmbed] });
+    await interaction.editReply({ embeds: [responseEmbed.toJSON()] });
   },
 };
