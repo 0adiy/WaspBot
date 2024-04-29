@@ -1,15 +1,11 @@
-import { ButtonBuilder, ButtonStyle } from "discord.js";
+import { ButtonBuilder, ButtonInteraction, ButtonStyle, Client } from "discord.js";
 import { EmbedBuilder } from "discord.js";
 import axios from "axios";
 import { load } from "cheerio";
+import config from "../../config.js";
 
 async function getSongLink(songName, artistName) {
-  const api = {
-    endpoint: "xxxxxxxxxxxxx",
-    user_id: "xxxxx",
-    token: "xxxxxxxxxx",
-    format: "json",
-  };
+  const api = config.apis.lyrics_api;
   let responseData = { status: 400, song: null };
   try {
     const response = await fetch(
@@ -70,6 +66,12 @@ export default {
     .setEmoji("<:lyrics:1234522617977765968>")
     .setLabel("lyrics")
     .setStyle(ButtonStyle.Secondary),
+  /**
+   *
+   * @param {ButtonInteraction} interaction
+   * @param {Client} client
+   * @returns
+   */
   async execute(interaction, client) {
     interaction.deferReply();
     const embed = await interaction.message.embeds[0];
@@ -86,7 +88,7 @@ export default {
 
     const request = await getSongLyrics(songName, embed.fields[2].value);
     if (request.status == 404) {
-      return interaction.reply("No lyrics available.");
+      return interaction.editReply(`No lyrics available. Query: ${songName}`);
     }
     const song = request.song;
     const responseEmbed = new EmbedBuilder()
@@ -101,8 +103,12 @@ export default {
           value: song.album,
           inline: false,
         },
-        { name: "Query", value: songName, inline: false },
+        {
+          name: "Query",
+          value: songName,
+          inline: false,
+        },
       );
-    await interaction.reply({ embeds: [responseEmbed] });
+    await interaction.editReply({ embeds: [responseEmbed.toJSON()] });
   },
 };
