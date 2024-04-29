@@ -78,14 +78,23 @@ export default {
     // REVIEW - Move this processing to the function itself?
     let songName;
     //split string at - | (
-    const songTitle = embed.title.split(/[-|()]/); //assume string is "America - A Horse With No Name (Official Audio)"
+    //assume string is "America - A Horse With No Name (Official Audio)"
     // assume songTitle = ["America", "A Horse With No Name", "Official Audio"]
-    if (songTitle.length > 2) {
-      songName = songTitle[0].length > songTitle[1].length ? songTitle[0] : songTitle[1];
+    let filteredTitle = embed.title
+      .split(/[-|()]/)
+      .filter(
+        (title) =>
+          !title.toLowerCase().includes("official") &&
+          !title.toLowerCase().includes("video") &&
+          !title.toLowerCase().includes("remaster") &&
+          !title.toLowerCase().includes("music"),
+      );
+    if (filteredTitle.length > 2) {
+      songName =
+        filteredTitle[0].length > filteredTitle[1].length ? filteredTitle[0] : filteredTitle[1];
     } else {
-      songName = songTitle[0];
+      songName = filteredTitle[0];
     }
-
     const request = await getSongLyrics(songName.trim(), embed.fields[2].value);
     if (request.status == 404) {
       return interaction.editReply(`No lyrics available. Query: ${songName}`);
