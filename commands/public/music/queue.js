@@ -4,10 +4,7 @@ import {
   Client,
   EmbedBuilder,
 } from "discord.js";
-import {
-  musicOptionsRow,
-  musicOptionsRow2,
-} from "../../../components/Rows/musicOptionsRow.js";
+import { musicOptionsRow } from "../../../components/Rows/musicOptionsRow.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -44,7 +41,7 @@ export default {
 
     await interaction.reply({
       embeds: [embed],
-      components: [musicOptionsRow, musicOptionsRow2],
+      components: [musicOptionsRow],
     });
   },
 };

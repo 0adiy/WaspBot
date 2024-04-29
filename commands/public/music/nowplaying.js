@@ -4,7 +4,10 @@ import {
   Client,
 } from "discord.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
-import { musicOptionsRow } from "../../../components/Rows/musicOptionsRow.js";
+import {
+  musicOptionsRow,
+  musicOptionsRow2,
+} from "../../../components/Rows/musicOptiooh it'nsRow.js";
 
 export default {
   data: new SlashCommandBuilder()
@@ -27,7 +30,7 @@ export default {
 
     await interaction.editReply({
       embeds: [embed],
-      components: [musicOptionsRow],
+      components: [musicOptionsRow, musicOptionsRow2],
     });
   },
 };
