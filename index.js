@@ -1,10 +1,12 @@
 import { Client, GatewayIntentBits, Partials, Collection } from "discord.js";
 import mongoose from "mongoose";
 import config from "./config.js";
+import ffmpegPath from "ffmpeg-static";
 
 import { DisTube } from "distube";
-import { SpotifyPlugin } from "@distube/spotify";
+// import { SpotifyPlugin } from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
+import { YouTubePlugin } from "@distube/youtube";
 // import { SoundCloudPlugin  } from "@distube/soundcloud";
 
 import loadEvents from "./handlers/eventHandler.js";
@@ -44,15 +46,16 @@ loadEvents(client);
 
 // Distube setup
 client.distube = new DisTube(client, {
-  emptyCooldown: 30,
   nsfw: true,
   plugins: [
-    new SpotifyPlugin({
-      emitEventsAfterFetching: true,
-    }),
+    // new SpotifyPlugin({
+    //   emitEventsAfterFetching: true,
+    // }),
     // new SoundCloudPlugin(),
     new YtDlpPlugin(),
+    new YouTubePlugin(),
   ],
+  ffmpeg: { path: ffmpegPath },
 });
 
 // Connecting to MongoDB

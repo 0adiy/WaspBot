@@ -8,6 +8,9 @@ import {
   musicOptionsRow2,
 } from "../../../components/Rows/musicOptionsRow.js";
 import getSongEmbed from "../../../functions/songEmbedGen.js";
+import { YouTubePlugin } from "@distube/youtube";
+
+const ytPlugin = new YouTubePlugin();
 
 export default {
   data: new SlashCommandBuilder()
@@ -66,9 +69,9 @@ export default {
     if (!focusedValue) return;
 
     /**
-     * @type {import("distube").SearchResult[]}
+     * @type {import("@distube/youtube").YouTubeSearchResultSong}
      */
-    const videosList = await client.distube.search(focusedValue);
+    const videosList = await ytPlugin.search(focusedValue);
 
     await interaction.respond(
       videosList.map(v => {
