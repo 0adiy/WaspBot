@@ -52,11 +52,13 @@ client.distube = new DisTube(client, {
     //   emitEventsAfterFetching: true,
     // }),
     // new SoundCloudPlugin(),
-    new YtDlpPlugin(),
     new YouTubePlugin(),
+    new YtDlpPlugin(),
   ],
   ffmpeg: { path: ffmpegPath },
 });
+
+// client.distube.on("ffmpegDebug", console.log);
 
 // Connecting to MongoDB
 mongoose

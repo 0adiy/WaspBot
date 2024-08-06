@@ -1,6 +1,7 @@
 import {
   ChatInputCommandInteraction,
   SlashCommandBuilder,
+  AutocompleteInteraction,
   Client,
 } from "discord.js";
 import {
@@ -63,6 +64,11 @@ export default {
       return interaction.editReply("```\n" + err + "\n```");
     }
   },
+  /**
+   * @param {AutocompleteInteraction} interaction
+   * @param {Client} client
+   * @returns
+   */
   async autocomplete(interaction, client) {
     const focusedValue = interaction.options.getFocused();
 
