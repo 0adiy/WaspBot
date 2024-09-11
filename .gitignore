@@ -1,6 +1,7 @@
 # Secrets
 /.env
 config.js
+cookies.json
 
 # Defaults
 /node_modules

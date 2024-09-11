@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Partials, Collection } from "discord.js";
 import mongoose from "mongoose";
 import config from "./config.js";
 import ffmpegPath from "ffmpeg-static";
+import { readFileSync, existsSync } from "fs";
 
 import { DisTube } from "distube";
 // import { SpotifyPlugin } from "@distube/spotify";
@@ -44,6 +45,15 @@ client.buttons = new Collection();
 client.uptimeTrackerTimestamp = new Date();
 loadEvents(client);
 
+let youtubePluginOptions;
+if (existsSync(config.cookiesPath)) {
+  console.log("cookies.json found");
+  // If the file exists, read and parse its contents
+  youtubePluginOptions = {
+    cookies: JSON.parse(readFileSync(config.cookiesPath, "utf8")),
+  };
+}
+
 // Distube setup
 client.distube = new DisTube(client, {
   nsfw: true,
@@ -52,7 +62,7 @@ client.distube = new DisTube(client, {
     //   emitEventsAfterFetching: true,
     // }),
     // new SoundCloudPlugin(),
-    new YouTubePlugin(),
+    new YouTubePlugin(youtubePluginOptions),
     new YtDlpPlugin(),
   ],
   ffmpeg: { path: ffmpegPath },
